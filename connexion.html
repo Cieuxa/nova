@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Connexion à NovaAccount | Nova Systems</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="styles/connexion.css">
+</head>
+<body>
+    <header>
+        <div class="header-container">
+            <a href="index.html" class="logo">
+                <span class="logo-text">NOVA SYSTEMS</span>
+                <span class="logo-trademark">™</span>
+            </a>
+            <nav class="main-nav">
+                <ul class="nav-list">
+                    <li><a href="produits.html" class="nav-link">Produits</a></li>
+                    <li><a href="securite.html" class="nav-link">Sécurité</a></li>
+                    <li><a href="support.html" class="nav-link">Support</a></li>
+                    <li><a href="entreprise.html" class="nav-link">Entreprise</a></li>
+                    <li><a href="connexion.html" class="nav-button active">Connexion</a></li>
+                </ul>
+                <button class="mobile-menu-btn" aria-label="Menu mobile">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <!-- Section Connexion -->
+        <section class="auth-section">
+            <div class="auth-container">
+                <div class="auth-card">
+                    <div class="auth-header">
+                        <div class="auth-logo">
+                            <span class="auth-logo-icon">N</span>
+                            <span class="auth-logo-text">NovaAccount</span>
+                        </div>
+                        <h1 class="auth-title">Se connecter</h1>
+                        <p class="auth-subtitle">Accédez à votre écosystème Nova Systems</p>
+                    </div>
+
+                    <!-- Formulaires -->
+                    <div class="auth-tabs">
+                        <button class="auth-tab active" data-tab="login">Connexion</button>
+                        <button class="auth-tab" data-tab="signup">Créer un compte</button>
+                    </div>
+
+                    <!-- Formulaire de Connexion -->
+                    <form class="auth-form active" id="login-form">
+                        <div class="form-group">
+                            <label for="email" class="form-label">Adresse e-mail</label>
+                            <input type="email" 
+                                   id="email" 
+                                   class="form-input"
+                                   placeholder="votre@email.com"
+                                   required>
+                            <div class="form-hint">Utilisez votre adresse NovaMail</div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="form-label-group">
+                                <label for="password" class="form-label">Mot de passe</label>
+                                <a href="#forgot-password" class="form-link">Mot de passe oublié ?</a>
+                            </div>
+                            <input type="password" 
+                                   id="password" 
+                                   class="form-input"
+                                   placeholder="Votre mot de passe"
+                                   required>
+                            <div class="password-toggle">
+                                <button type="button" class="toggle-btn" aria-label="Afficher le mot de passe">
+                                    👁️
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="form-options">
+                            <label class="checkbox-label">
+                                <input type="checkbox" name="remember" checked>
+                                <span class="checkbox-custom"></span>
+                                <span class="checkbox-text">Rester connecté</span>
+                            </label>
+                        </div>
+
+                        <button type="submit" class="auth-button">
+                            <span class="button-text">Se connecter</span>
+                            <span class="button-icon">→</span>
+                        </button>
+
+                        <div class="auth-divider">
+                            <span>ou continuer avec</span>
+                        </div>
+
+                        <div class="social-auth">
+                            <button type="button" class="social-button google">
+                                <span class="social-icon">G</span>
+                                <span class="social-text">Google</span>
+                            </button>
+                            <button type="button" class="social-button apple">
+                                <span class="social-icon"></span>
+                                <span class="social-text">Apple</span>
+                            </button>
+                            <button type="button" class="social-button github">
+                                <span class="social-icon">gh</span>
+                                <span class="social-text">GitHub</span>
+                            </button>
+                        </div>
+                    </form>
+
+                    <!-- Formulaire d'Inscription -->
+                    <form class="auth-form" id="signup-form">
+                        <div class="form-group">
+                            <label for="signup-email" class="form-label">Adresse e-mail</label>
+                            <input type="email" 
+                                   id="signup-email" 
+                                   class="form-input"
+                                   placeholder="votre@email.com"
+                                   required>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="first-name" class="form-label">Prénom</label>
+                                <input type="text" 
+                                       id="first-name" 
+                                       class="form-input"
+                                       placeholder="Jean"
+                                       required>
+                            </div>
+                            <div class="form-group">
+                                <label for="last-name" class="form-label">Nom</label>
+                                <input type="text" 
+                                       id="last-name" 
+                                       class="form-input"
+                                       placeholder="Dupont"
+                                       required>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="signup-password" class="form-label">Mot de passe</label>
+                            <input type="password" 
+                                   id="signup-password" 
+                                   class="form-input"
+                                   placeholder="Créez un mot de passe sécurisé"
+                                   required>
+                            <div class="password-strength">
+                                <div class="strength-meter">
+                                    <div class="strength-bar" data-strength="0"></div>
+                                </div>
+                                <div class="strength-text">Force du mot de passe : faible</div>
+                            </div>
+                            <ul class="password-requirements">
+                                <li class="requirement" data-requirement="length">Au moins 8 caractères</li>
+                                <li class="requirement" data-requirement="uppercase">Une majuscule</li>
+                                <li class="requirement" data-requirement="number">Un chiffre</li>
+                                <li class="requirement" data-requirement="special">Un caractère spécial</li>
+                            </ul>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="confirm-password" class="form-label">Confirmer le mot de passe</label>
+                            <input type="password" 
+                                   id="confirm-password" 
+                                   class="form-input"
+                                   placeholder="Retapez votre mot de passe"
+                                   required>
+                        </div>
+
+                        <div class="form-options">
+                            <label class="checkbox-label">
+                                <input type="checkbox" name="newsletter" checked>
+                                <span class="checkbox-custom"></span>
+                                <span class="checkbox-text">Recevoir les nouveautés et offres spéciales</span>
+                            </label>
+                            <label class="checkbox-label">
+                                <input type="checkbox" name="terms" required>
+                                <span class="checkbox-custom"></span>
+                                <span class="checkbox-text">
+                                    J'accepte les 
+                                    <a href="securite.html#conditions" class="inline-link">Conditions d'utilisation</a> 
+                                    et la 
+                                    <a href="securite.html" class="inline-link">Politique de confidentialité</a>
+                                </span>
+                            </label>
+                        </div>
+
+                        <button type="submit" class="auth-button">
+                            <span class="button-text">Créer mon compte</span>
+                            <span class="button-icon">→</span>
+                        </button>
+
+                        <p class="auth-note">
+                            En créant un compte, vous accédez à l'ensemble de l'écosystème Nova Systems.
+                        </p>
+                    </form>
+
+                    <!-- Mot de passe oublié -->
+                    <form class="auth-form" id="forgot-password-form">
+                        <div class="form-group">
+                            <label for="reset-email" class="form-label">Adresse e-mail</label>
+                            <input type="email" 
+                                   id="reset-email" 
+                                   class="form-input"
+                                   placeholder="votre@email.com"
+                                   required>
+                            <div class="form-hint">
+                                Nous vous enverrons un lien de réinitialisation
+                            </div>
+                        </div>
+
+                        <button type="submit" class="auth-button">
+                            <span class="button-text">Envoyer le lien de réinitialisation</span>
+                            <span class="button-icon">→</span>
+                        </button>
+
+                        <div class="auth-back">
+                            <a href="#login" class="back-link">← Retour à la connexion</a>
+                        </div>
+                    </form>
+
+                    <!-- Vérification 2FA -->
+                    <form class="auth-form" id="2fa-form">
+                        <div class="auth-header">
+                            <div class="auth-icon">🔐</div>
+                            <h2 class="auth-title">Vérification en deux étapes</h2>
+                            <p class="auth-subtitle">
+                                Entrez le code à 6 chiffres de votre application d'authentification
+                            </p>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="code-inputs">
+                                <input type="text" 
+                                       class="code-input" 
+                                       maxlength="1" 
+                                       autocomplete="off"
+                                       data-index="0">
+                                <input type="text" 
+                                       class="code-input" 
+                                       maxlength="1" 
+                                       autocomplete="off"
+                                       data-index="1">
+                                <input type="text" 
+                                       class="code-input" 
+                                       maxlength="1" 
+                                       autocomplete="off"
+                                       data-index="2">
+                                <span class="code-separator">-</span>
+                                <input type="text" 
+                                       class="code-input" 
+                                       maxlength="1" 
+                                       autocomplete="off"
+                                       data-index="3">
+                                <input type="text" 
+                                       class="code-input" 
+                                       maxlength="1" 
+                                       autocomplete="off"
+                                       data-index="4">
+                                <input type="text" 
+                                       class="code-input" 
+                                       maxlength="1" 
+                                       autocomplete="off"
+                                       data-index="5">
+                            </div>
+                            <div class="form-hint center">
+                                Code valide pendant 30 secondes
+                            </div>
+                        </div>
+
+                        <div class="form-options">
+                            <label class="checkbox-label">
+                                <input type="checkbox" name="trust-device">
+                                <span class="checkbox-custom"></span>
+                                <span class="checkbox-text">Se souvenir de cet appareil pendant 30 jours</span>
+                            </label>
+                        </div>
+
+                        <button type="submit" class="auth-button">
+                            <span class="button-text">Vérifier</span>
+                            <span class="button-icon">→</span>
+                        </button>
+
+                        <div class="auth-actions">
+                            <a href="#resend-code" class="action-link">Renvoyer le code</a>
+                            <a href="#other-method" class="action-link">Utiliser une autre méthode</a>
+                        </div>
+                    </form>
+                </div>
+
+                <div class="auth-sidebar">
+                    <div class="sidebar-content">
+                        <h2 class="sidebar-title">Pourquoi créer un NovaAccount ?</h2>
+                        
+                        <div class="benefits-list">
+                            <div class="benefit">
+                                <div class="benefit-icon">🔐</div>
+                                <div class="benefit-content">
+                                    <h3 class="benefit-title">Sécurité maximale</h3>
+                                    <p class="benefit-description">
+                                        Chiffrement de bout en bout et authentification à deux facteurs
+                                    </p>
+                                </div>
+                            </div>
+                            
+                            <div class="benefit">
+                                <div class="benefit-icon">🔄</div>
+                                <div class="benefit-content">
+                                    <h3 class="benefit-title">Synchronisation universelle</h3>
+                                    <p class="benefit-description">
+                                        Accédez à vos données sur tous vos appareils
+                                    </p>
+                                </div>
+                            </div>
+                            
+                            <div class="benefit">
+                                <div class="benefit-icon">🎁</div>
+                                <div class="benefit-content">
+                                    <h3 class="benefit-title">15 Go gratuits</h3>
+                                    <p class="benefit-description">
+                                        Stockage cloud sécurisé offert avec chaque compte
+                                    </p>
+                                </div>
+                            </div>
+                            
+                            <div class="benefit">
+                                <div class="benefit-icon">⚡</div>
+                                <div class="benefit-content">
+                                    <h3 class="benefit-title">Performance optimisée</h3>
+                                    <p class="benefit-description">
+                                        Expérience utilisateur fluide sur tous les produits Nova
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="testimonial">
+                            <div class="testimonial-content">
+                                "NovaAccount a simplifié ma vie numérique. Une seule connexion pour tout !"
+                            </div>
+                            <div class="testimonial-author">
+                                <div class="author-avatar">👤</div>
+                                <div class="author-info">
+                                    <div class="author-name">Marie L.</div>
+                                    <div class="author-role">Utilisatrice depuis 2022</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="security-badge">
+                            <div class="badge-icon">🛡️</div>
+                            <div class="badge-content">
+                                <div class="badge-title">Sécurité certifiée</div>
+                                <div class="badge-description">
+                                    ISO 27001 & SOC2 Type II
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-brand">
+                <a href="index.html" class="footer-logo">NOVA SYSTEMS™</a>
+                <p class="footer-description">
+                    Rendre la technologie plus intuitive, sécurisée et accessible à tous.
+                </p>
+                <div class="social-links">
+                    <a href="#" aria-label="Twitter" class="social-link">𝕏</a>
+                    <a href="#" aria-label="LinkedIn" class="social-link">in</a>
+                    <a href="#" aria-label="GitHub" class="social-link">gh</a>
+                    <a href="#" aria-label="YouTube" class="social-link">▶️</a>
+                </div>
+            </div>
+
+            <div class="footer-links-grid">
+                <div class="footer-column">
+                    <h3 class="footer-column-title">Produits</h3>
+                    <ul class="footer-list">
+                        <li><a href="produits.html#novaos">NovaOS™</a></li>
+                        <li><a href="produits.html#novacloud">NovaCloud™</a></li>
+                        <li><a href="produits.html#novaaccount">NovaAccount™</a></li>
+                        <li><a href="produits.html#enterprise">Nova Enterprise</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3 class="footer-column-title">Entreprise</h3>
+                    <ul class="footer-list">
+                        <li><a href="entreprise.html">À propos</a></li>
+                        <li><a href="entreprise.html#carrieres">Carrières</a></li>
+                        <li><a href="entreprise.html#presse">Presse</a></li>
+                        <li><a href="entreprise.html#impact">Impact environnemental</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3 class="footer-column-title">Support</h3>
+                    <ul class="footer-list">
+                        <li><a href="support.html">Centre d'aide</a></li>
+                        <li><a href="support.html#communaute">Communauté</a></li>
+                        <li><a href="support.html#contact">Contact</a></li>
+                        <li><a href="support.html#statut">Statut des services</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3 class="footer-column-title">Légal</h3>
+                    <ul class="footer-list">
+                        <li><a href="securite.html">Confidentialité</a></li>
+                        <li><a href="securite.html#conditions">Conditions d'utilisation</a></li>
+                        <li><a href="securite.html#mentions">Mentions légales</a></li>
+                        <li><a href="securite.html#transparence">Rapports de transparence</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        
+        <div class="footer-bottom">
+            <div class="footer-bottom-content">
+                <div class="copyright">
+                    © 2024 Nova Systems, Inc. Tous droits réservés.
+                </div>
+                <div class="footer-legal">
+                    <a href="#">Politique de confidentialité</a>
+                    <a href="#">Conditions d'utilisation</a>
+                    <a href="#">Préférences de cookies</a>
+                </div>
+                <div class="language-selector">
+                    <select aria-label="Choisir la langue">
+                        <option value="fr" selected>Français</option>
+                        <option value="en">English</option>
+                        <option value="es">Español</option>
+                        <option value="de">Deutsch</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="scripts/menu.js"></script>
+    <script src="scripts/connexion.js"></script>
+</body>
+</html>
