@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Démo du Système de Compte | Nova Systems</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .demo-section {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        .demo-card {
+            background: var(--bg-secondary);
+            border-radius: var(--border-radius-lg);
+            padding: 30px;
+            margin-bottom: 20px;
+            border-left: 4px solid var(--nova-blue);
+        }
+
+        .demo-title {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--text-primary);
+            margin-bottom: 15px;
+        }
+
+        .demo-step {
+            margin: 15px 0;
+            padding-left: 30px;
+            position: relative;
+        }
+
+        .demo-step::before {
+            content: "→";
+            position: absolute;
+            left: 0;
+            color: var(--nova-blue);
+            font-weight: bold;
+        }
+
+        .button-group {
+            display: flex;
+            gap: 10px;
+            margin: 20px 0;
+            flex-wrap: wrap;
+        }
+
+        .btn-demo {
+            background: var(--nova-blue);
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: background 0.3s;
+        }
+
+        .btn-demo:hover {
+            background: #5a5f9f;
+        }
+
+        .info-box {
+            background: var(--info);
+            color: white;
+            padding: 15px;
+            border-radius: 6px;
+            margin: 15px 0;
+        }
+
+        .code-block {
+            background: var(--bg-primary);
+            border: 1px solid var(--border-color);
+            padding: 15px;
+            border-radius: 6px;
+            overflow-x: auto;
+            font-family: monospace;
+            font-size: 0.9rem;
+            margin: 10px 0;
+        }
+
+        .feature-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .feature-list li {
+            padding: 8px 0;
+            padding-left: 25px;
+            position: relative;
+        }
+
+        .feature-list li::before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: var(--success);
+            font-weight: bold;
+        }
+
+        .status-online {
+            display: inline-block;
+            width: 10px;
+            height: 10px;
+            background: var(--success);
+            border-radius: 50%;
+            margin-right: 8px;
+        }
+
+        .user-info {
+            background: var(--bg-primary);
+            padding: 15px;
+            border-radius: 6px;
+            margin: 15px 0;
+            border-left: 3px solid var(--nova-blue);
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-container">
+            <a href="index.html" class="logo">
+                <span class="logo-text">NOVA SYSTEMS</span>
+                <span class="logo-trademark">™</span>
+            </a>
+            <nav class="main-nav">
+                <ul class="nav-list">
+                    <li><a href="index.html" class="nav-link">Accueil</a></li>
+                    <li><a href="connexion.html" class="nav-button">Connexion</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section class="demo-section">
+            <h1 style="text-align: center; margin-bottom: 10px;">🚀 Système de Gestion de Compte Complet</h1>
+            <p style="text-align: center; color: var(--text-secondary); margin-bottom: 40px;">
+                Découvrez toutes les fonctionnalités de votre nouveau système d'authentification et de profil
+            </p>
+
+            <!-- Status -->
+            <div class="demo-card">
+                <div class="demo-title">📊 État du Système</div>
+                <div id="system-status" class="user-info">
+                    <span class="status-online"></span>
+                    <strong>Systeme actif</strong>
+                    <div style="margin-top: 10px; color: var(--text-secondary);">
+                        <p>✅ Authentification fonctionnelle</p>
+                        <p>✅ Gestion de profil active</p>
+                        <p>✅ NovaMail simulé</p>
+                        <p>✅ NovaDrive simulé</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 1. Inscription -->
+            <div class="demo-card">
+                <div class="demo-title">1️⃣ Créer un Compte</div>
+                <div class="demo-step">Allez sur la page <strong>Connexion</strong></div>
+                <div class="demo-step">Cliquez sur l'onglet <strong>"Inscription"</strong></div>
+                <div class="demo-step">Remplissez le formulaire avec vos données</div>
+                <div class="demo-step">Acceptez les conditions d'utilisation</div>
+                <div class="demo-step">Cliquez sur <strong>"S'inscrire"</strong></div>
+                
+                <div class="info-box" style="margin-top: 20px;">
+                    📝 <strong>Exigences du mot de passe :</strong>
+                    <ul style="margin: 10px 0; padding-left: 20px;">
+                        <li>Au moins 8 caractères</li>
+                        <li>Une majuscule</li>
+                        <li>Un chiffre</li>
+                        <li>Un caractère spécial (!@#$%^&* etc.)</li>
+                    </ul>
+                </div>
+
+                <div class="button-group">
+                    <a href="connexion.html" class="btn-demo">Aller à la Connexion →</a>
+                </div>
+            </div>
+
+            <!-- 2. Se connecter -->
+            <div class="demo-card">
+                <div class="demo-title">2️⃣ Se Connecter</div>
+                <div class="demo-step">Allez sur la page <strong>Connexion</strong></div>
+                <div class="demo-step">Restez sur l'onglet <strong>"Se connecter"</strong> (par défaut)</div>
+                <div class="demo-step">Entrez votre <strong>email</strong> et <strong>mot de passe</strong></div>
+                <div class="demo-step">Cliquez sur <strong>"Se connecter"</strong></div>
+                
+                <div class="info-box" style="margin-top: 20px;">
+                    🔐 <strong>Sécurité :</strong> Votre mot de passe n'est jamais stocké en session. 
+                    Seul votre profil utilisateur est conservé.
+                </div>
+            </div>
+
+            <!-- 3. Consulter le profil -->
+            <div class="demo-card">
+                <div class="demo-title">3️⃣ Accéder à Votre Profil</div>
+                <div class="demo-step">Une fois connecté, cliquez sur <strong>"Mon Compte"</strong> dans le header</div>
+                <div class="demo-step">Vous voyez votre <strong>avatar avec initiales</strong></div>
+                <div class="demo-step">Consultez vos <strong>emails de bienvenue</strong></div>
+                <div class="demo-step">Explorez vos <strong>fichiers cloud</strong></div>
+                
+                <div class="user-info" style="margin-top: 20px;">
+                    <strong>Informations disponibles :</strong>
+                    <ul style="margin: 10px 0; padding-left: 20px; list-style: none;">
+                        <li>✅ Avatar automatique (vos initiales)</li>
+                        <li>✅ Informations personnelles (nom, email)</li>
+                        <li>✅ Statut de sécurité</li>
+                        <li>✅ Dernière connexion</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- 4. Consulter les emails -->
+            <div class="demo-card">
+                <div class="demo-title">📧 4️⃣ Lire Vos Emails</div>
+                <div class="demo-step">Sur votre profil, trouvez le widget <strong>"NovaMail"</strong></div>
+                <div class="demo-step">Cliquez sur n'importe quel email pour le lire</div>
+                <div class="demo-step">Une fenêtre s'ouvre avec le détail du message</div>
+                <div class="demo-step">Fermez avec la croix (×) pour revenir au profil</div>
+                
+                <div class="info-box" style="margin-top: 20px;">
+                    📬 <strong>Emails pré-générés :</strong>
+                    <ul style="margin: 10px 0; padding-left: 20px;">
+                        <li>Email de bienvenue de Nova Systems</li>
+                        <li>Email d'une collègue avec propositions</li>
+                        <li>Email avec rapport mensuel</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- 5. Gérer les fichiers -->
+            <div class="demo-card">
+                <div class="demo-title">☁️ 5️⃣ Consulter Votre Cloud</div>
+                <div class="demo-step">Sur votre profil, trouvez le widget <strong>"NovaDrive"</strong></div>
+                <div class="demo-step">Vous verrez une liste de 5 fichiers fictifs</div>
+                <div class="demo-step">Cliquez sur un fichier pour voir ses détails</div>
+                <div class="demo-step">La barre de stockage affiche votre utilisation</div>
+                
+                <div class="user-info" style="margin-top: 20px;">
+                    <strong>Fichiers inclus :</strong>
+                    <ul style="margin: 10px 0; padding-left: 20px; list-style: none;">
+                        <li>📊 Présentation_Projet_2024.pptx</li>
+                        <li>📈 Budget_Q1.xlsx</li>
+                        <li>📄 Documentation.pdf</li>
+                        <li>📁 Photos_Team.zip</li>
+                        <li>📝 Notes_Reunion_Dec.docx</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- 6. Modifier votre profil -->
+            <div class="demo-card">
+                <div class="demo-title">✏️ 6️⃣ Modifier Votre Profil</div>
+                <div class="demo-step">Sur votre profil, trouvez le widget <strong>"Mes Informations"</strong></div>
+                <div class="demo-step">Cliquez sur le bouton <strong>"✏️"</strong> pour passer en mode édition</div>
+                <div class="demo-step">Modifiez votre <strong>Prénom</strong> et <strong>Nom</strong></div>
+                <div class="demo-step">Cliquez sur <strong>"Enregistrer"</strong> pour valider</div>
+                
+                <div class="info-box" style="margin-top: 20px;">
+                    ⚠️ <strong>Note :</strong> L'email ne peut pas être modifié (il est l'identifiant unique)
+                </div>
+            </div>
+
+            <!-- 7. Se déconnecter -->
+            <div class="demo-card">
+                <div class="demo-title">🚪 7️⃣ Se Déconnecter</div>
+                <ul class="feature-list">
+                    <li>Cliquez sur <strong>"Déconnexion"</strong> dans le header</li>
+                    <li>Confirmez la déconnexion</li>
+                    <li>Vous êtes redirigé vers la page de connexion</li>
+                    <li>Votre session est supprimée de manière sécurisée</li>
+                </ul>
+            </div>
+
+            <!-- Informations techniques -->
+            <div class="demo-card">
+                <div class="demo-title">🔧 Informations Techniques</div>
+                
+                <h3 style="color: var(--text-primary); margin-top: 20px;">Afficher les données de session</h3>
+                <p>Ouvrez la console du navigateur (F12) et tapez :</p>
+                <div class="code-block">
+                    JSON.parse(localStorage.getItem('nova_current_user'))
+                </div>
+
+                <h3 style="color: var(--text-primary); margin-top: 20px;">Afficher tous les comptes</h3>
+                <p>Dans la console, tapez :</p>
+                <div class="code-block">
+                    JSON.parse(localStorage.getItem('nova_users'))
+                </div>
+
+                <h3 style="color: var(--text-primary); margin-top: 20px;">Réinitialiser les données</h3>
+                <p>Pour effacer tous les comptes et recommencer :</p>
+                <div class="code-block">
+                    localStorage.clear()
+                </div>
+                <p style="color: var(--text-secondary); margin-top: 10px;">
+                    ⚠️ <strong>Attention :</strong> Cette action est irréversible !
+                </p>
+            </div>
+
+            <!-- Fonctionnalités -->
+            <div class="demo-card">
+                <div class="demo-title">✨ Fonctionnalités Implémentées</div>
+                <ul class="feature-list">
+                    <li>Inscription avec validation email et mot de passe fort</li>
+                    <li>Connexion sécurisée avec gestion de session</li>
+                    <li>Profil utilisateur avec avatar automatique</li>
+                    <li>Modification de profil en temps réel</li>
+                    <li>Système de faux emails (NovaMail)</li>
+                    <li>Système de stockage cloud (NovaDrive)</li>
+                    <li>Vérification de sécurité et dernière connexion</li>
+                    <li>Navigation dynamique selon l'état de connexion</li>
+                    <li>Déconnexion sécurisée</li>
+                    <li>Stockage persistant en localStorage</li>
+                </ul>
+            </div>
+
+            <!-- Appel à l'action -->
+            <div class="demo-card" style="text-align: center; border-left: 4px solid var(--success);">
+                <div class="demo-title" style="margin-bottom: 20px;">🎯 Prêt à Commencer ?</div>
+                <p>Testez le système complet en créant un compte :</p>
+                <div class="button-group" style="justify-content: center;">
+                    <a href="connexion.html" class="btn-demo" style="background: var(--success); font-size: 1.1rem; padding: 15px 30px;">
+                        Créer un Compte →
+                    </a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-brand">
+                <a href="index.html" class="footer-logo">NOVA SYSTEMS™</a>
+                <p class="footer-description">Rendre la technologie plus intuitive, sécurisée et accessible à tous.</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <div class="footer-bottom-content">
+                <div class="copyright">© 2024 Nova Systems, Inc. Tous droits réservés.</div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="scripts/menu.js"></script>
+    <script src="scripts/auth.clean.js"></script>
+</body>
+</html>

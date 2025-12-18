@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mon Profil | Nova Systems</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="styles/profil.css">
+    <link rel="stylesheet" href="styles/glitch.css">
+</head>
+
+<body>
+    <div id="auth-check" class="loading-overlay">
+        <div class="loading-spinner"></div>
+    </div>
+
+    <header>
+        <div class="header-container">
+            <a href="index.html" class="logo">
+                <span class="logo-text">NOVA SYSTEMS</span>
+                <span class="logo-trademark">™</span>
+            </a>
+            <nav class="main-nav">
+                <ul class="nav-list">
+                    <li><a href="produits.html" class="nav-link">Produits</a></li>
+                    <li><a href="securite.html" class="nav-link">Sécurité</a></li>
+                    <li><a href="support.html" class="nav-link">Support</a></li>
+                    <li><a href="entreprise.html" class="nav-link">Entreprise</a></li>
+                    <li><a href="profil.html" class="nav-button active">Mon Compte</a></li>
+                </ul>
+                <button class="mobile-menu-btn" aria-label="Menu mobile">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section class="profile-section">
+            <div class="profile-container">
+                <!-- Sidebar -->
+                <aside class="profile-sidebar">
+                    <div class="profile-avatar" id="avatar-placeholder">
+                        <!-- Initiales injectées via JS -->
+                    </div>
+                    <h2 class="profile-name" id="sidebar-name">Chargement...</h2>
+                    <span class="profile-role">Membre Nova</span>
+
+                    <ul class="profile-menu">
+                        <li class="profile-menu-item">
+                            <a href="#infos" class="profile-menu-link active">
+                                <span>👤</span> Informations personnelles
+                            </a>
+                        </li>
+                        <li class="profile-menu-item">
+                            <a href="#security" class="profile-menu-link">
+                                <span>🔒</span> Sécurité (Bientôt)
+                            </a>
+                        </li>
+                        <li class="profile-menu-item">
+                            <a href="#" id="logout-btn" class="profile-menu-link danger">
+                                <span>🚪</span> Déconnexion
+                            </a>
+                        </li>
+                    </ul>
+                </aside>
+
+                <!-- Contenu Principal -->
+                <div class="profile-content">
+                    <div class="profile-header">
+                        <div>
+                            <h1 class="profile-title" id="welcome-message">Bienvenue</h1>
+                            <p class="profile-subtitle">Gérez votre écosystème Nova Systems</p>
+                        </div>
+                    </div>
+
+                    <!-- Dashboard Widgets -->
+                    <div class="dashboard-grid">
+
+                        <!-- Widget NovaMail -->
+                        <div class="widget-card mail-widget">
+                            <div class="widget-header">
+                                <h3 class="widget-title">✉️ NovaMail</h3>
+                                <span class="widget-badge">3 nouveaux</span>
+                            </div>
+                            <div class="widget-body" id="mail-list">
+                                <!-- Emails injectés par JS -->
+                                <div class="loading-spinner"></div>
+                            </div>
+                            <div class="widget-footer">
+                                <a href="#" class="widget-link">Ouvrir NovaMail →</a>
+                            </div>
+                        </div>
+
+                        <!-- Widget NovaDrive -->
+                        <div class="widget-card drive-widget">
+                            <div class="widget-header">
+                                <h3 class="widget-title">☁️ NovaDrive</h3>
+                                <div style="display: flex; gap: 10px; align-items: center;">
+                                    <span class="widget-badge" id="storage-usage">14% utilisé</span>
+                                    <button id="add-file-btn" class="icon-btn" title="Nouveau fichier"
+                                        style="background: var(--nova-blue); color: white; width: 24px; height: 24px; display: flex; align-items: center; justify-content: center; border-radius: 50%; font-size: 1.2rem;">+</button>
+                                </div>
+                            </div>
+                            <div class="storage-bar-container">
+                                <div class="storage-bar">
+                                    <div class="storage-progress" style="width: 14%"></div>
+                                </div>
+                                <span class="storage-text">2.1 Go de 15 Go</span>
+                            </div>
+                            <div class="widget-body" id="file-list">
+                                <!-- Fichiers injectés par JS -->
+                                <div class="loading-spinner"></div>
+                            </div>
+                            <div class="widget-footer">
+                                <a href="#" class="widget-link">Gérer mes fichiers →</a>
+                            </div>
+                        </div>
+
+                        <!-- Widget Infos Personnelles (Compact) -->
+                        <div class="widget-card info-widget">
+                            <div class="widget-header">
+                                <h3 class="widget-title">👤 Mes Informations</h3>
+                                <button id="edit-mode-btn" class="icon-btn" title="Modifier">✏️</button>
+                            </div>
+                            <div class="widget-body">
+                                <form id="profile-form" class="profile-form-compact">
+                                    <div class="form-group-compact">
+                                        <label>Prénom</label>
+                                        <input type="text" id="first-name" disabled>
+                                    </div>
+                                    <div class="form-group-compact">
+                                        <label>Nom</label>
+                                        <input type="text" id="last-name" disabled>
+                                    </div>
+                                    <div class="form-group-compact">
+                                        <label>Email</label>
+                                        <input type="email" id="email" disabled>
+                                    </div>
+                                    <div class="form-actions" id="edit-actions" style="display: none;">
+                                        <button type="button" id="cancel-btn"
+                                            class="btn-sm btn-secondary">Annuler</button>
+                                        <button type="submit" id="save-btn"
+                                            class="btn-sm btn-primary">Enregistrer</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+
+                        <!-- Widget Sécurité -->
+                        <div class="widget-card security-widget">
+                            <div class="widget-header">
+                                <h3 class="widget-title">🛡️ Sécurité</h3>
+                                <span class="status-indicator safe">Protégé</span>
+                            </div>
+                            <div class="widget-body">
+                                <ul class="security-list">
+                                    <li class="security-item">
+                                        <span class="security-icon">✅</span>
+                                        <div class="security-info">
+                                            <span class="security-label">Double authentification</span>
+                                            <span class="security-value">Active</span>
+                                        </div>
+                                    </li>
+                                    <li class="security-item">
+                                        <span class="security-icon">📅</span>
+                                        <div class="security-info">
+                                            <span class="security-label">Dernière connexion</span>
+                                            <span class="security-value" id="last-login">Aujourd'hui</span>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-brand">
+                <a href="index.html" class="footer-logo">NOVA SYSTEMS™</a>
+                <p class="footer-description">
+                    Rendre la technologie plus intuitive, sécurisée et accessible à tous.
+                </p>
+            </div>
+            <!-- Footer links same as other pages -->
+            <div class="footer-links-grid">
+                <div class="footer-column">
+                    <h3 class="footer-column-title">Produits</h3>
+                    <ul class="footer-list">
+                        <li><a href="produits.html#novaos">NovaOS™</a></li>
+                        <li><a href="produits.html#novacloud">NovaCloud™</a></li>
+                        <li><a href="produits.html#novaaccount">NovaAccount™</a></li>
+                        <li><a href="produits.html#enterprise">Nova Enterprise</a></li>
+                    </ul>
+                </div>
+                <!-- ... other columns ... -->
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <div class="footer-bottom-content">
+                <div class="copyright">
+                    © 2024 Nova Systems, Inc. Tous droits réservés.
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="scripts/menu.js"></script>
+    <script src="scripts/protect-pages.js"></script>
+    <script src="scripts/profil.js"></script>
+    <script src="scripts/glitch-effect.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Système de Connexion | Nova Systems</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+        
+        .container {
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            max-width: 600px;
+            width: 100%;
+            padding: 40px;
+        }
+        
+        h1 {
+            color: #333;
+            margin-bottom: 10px;
+            text-align: center;
+        }
+        
+        .subtitle {
+            color: #666;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        
+        .test-section {
+            margin-bottom: 30px;
+        }
+        
+        .test-section h2 {
+            color: #667eea;
+            font-size: 18px;
+            margin-bottom: 15px;
+            border-bottom: 2px solid #667eea;
+            padding-bottom: 10px;
+        }
+        
+        .account {
+            background: #f5f5f5;
+            border-left: 4px solid #667eea;
+            padding: 15px;
+            margin-bottom: 10px;
+            border-radius: 4px;
+        }
+        
+        .account-email {
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 5px;
+            font-size: 14px;
+        }
+        
+        .account-password {
+            color: #666;
+            font-size: 14px;
+        }
+        
+        .buttons {
+            display: flex;
+            gap: 10px;
+            margin-top: 20px;
+        }
+        
+        .btn {
+            flex: 1;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 6px;
+            font-size: 14px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            text-align: center;
+            display: inline-block;
+        }
+        
+        .btn-primary {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(102, 126, 234, 0.3);
+        }
+        
+        .btn-secondary {
+            background: #e0e0e0;
+            color: #333;
+        }
+        
+        .btn-secondary:hover {
+            background: #d0d0d0;
+        }
+        
+        .status {
+            margin-top: 20px;
+            padding: 15px;
+            border-radius: 6px;
+            text-align: center;
+        }
+        
+        .status.connected {
+            background: #e6ffed;
+            color: #055;
+            border: 1px solid #0a0;
+        }
+        
+        .status.disconnected {
+            background: #ffe6e6;
+            color: #500;
+            border: 1px solid #a00;
+        }
+        
+        .info {
+            background: #eef6ff;
+            color: #003;
+            padding: 15px;
+            border-radius: 6px;
+            margin-bottom: 20px;
+            border-left: 4px solid #0066cc;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🔐 Test Système de Connexion</h1>
+        <p class="subtitle">Nova Systems - Mode Simulation</p>
+        
+        <div class="info">
+            ℹ️ Ceci est une interface de test. Utilisez les comptes de démo ci-dessous pour tester le système de connexion.
+        </div>
+        
+        <div class="test-section">
+            <h2>📋 Comptes de Démo Disponibles</h2>
+            
+            <div class="account">
+                <div class="account-email">📧 demo@nova.com</div>
+                <div class="account-password">🔒 Demo1234</div>
+            </div>
+            
+            <div class="account">
+                <div class="account-email">📧 test@nova.com</div>
+                <div class="account-password">🔒 Test1234</div>
+            </div>
+            
+            <div class="account">
+                <div class="account-email">📧 user@nova.com</div>
+                <div class="account-password">🔒 User1234</div>
+            </div>
+        </div>
+        
+        <div class="test-section">
+            <h2>🚀 Actions Rapides</h2>
+            <div class="buttons">
+                <a href="connexion.html" class="btn btn-primary">Aller à la Connexion →</a>
+                <a href="profil.html" class="btn btn-secondary">Aller au Profil</a>
+            </div>
+        </div>
+        
+        <div id="status-container"></div>
+        
+        <div class="test-section">
+            <h2>✅ Guide de Test</h2>
+            <ol style="color: #666; line-height: 1.8; padding-left: 20px;">
+                <li>Cliquez sur "Aller à la Connexion"</li>
+                <li>Entrez un email et mot de passe d'un compte démo</li>
+                <li>Cliquez sur "Se connecter"</li>
+                <li>Vous devriez être redirigé vers le profil avec votre nom affiché</li>
+                <li>Testez le bouton de déconnexion</li>
+            </ol>
+        </div>
+    </div>
+    
+    <script>
+        // Afficher le statut de connexion
+        window.addEventListener('load', function() {
+            const statusContainer = document.getElementById('status-container');
+            try {
+                const user = JSON.parse(localStorage.getItem('nova_mock_user'));
+                if (user) {
+                    statusContainer.innerHTML = `
+                        <div class="status connected">
+                            ✓ Vous êtes connecté en tant que <strong>${user.firstName} ${user.lastName}</strong> (${user.email})
+                        </div>
+                    `;
+                } else {
+                    statusContainer.innerHTML = `
+                        <div class="status disconnected">
+                            ✗ Vous n'êtes pas connecté
+                        </div>
+                    `;
+                }
+            } catch(e) {
+                statusContainer.innerHTML = `
+                    <div class="status disconnected">
+                        ✗ Erreur de vérification du statut
+                    </div>
+                `;
+            }
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,12 @@
+{
+  "name": "novasystems-tests",
+  "version": "1.0.0",
+  "description": "Tests automatiques légers pour scripts/auth.clean.js",
+  "main": "run-auth-test.js",
+  "scripts": {
+    "test": "node run-auth-test.js"
+  },
+  "dependencies": {
+    "jsdom": "^22.1.0"
+  }
+}

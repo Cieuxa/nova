@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test du Système | Nova Systems</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 40px 20px;
+        }
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 15px;
+            padding: 40px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+        }
+        h1 { color: #667eea; margin-bottom: 30px; text-align: center; }
+        .test-item {
+            margin: 20px 0;
+            padding: 15px;
+            border-left: 4px solid #667eea;
+            background: #f5f5f5;
+            border-radius: 4px;
+        }
+        .test-item strong { color: #667eea; }
+        .test-result { margin-top: 10px; font-weight: bold; }
+        .success { color: #4caf50; }
+        .error { color: #f44336; }
+        .warning { color: #ff9800; }
+        button {
+            background: #667eea;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 16px;
+            margin: 10px 5px;
+        }
+        button:hover { background: #5a5f9f; }
+        .button-group { text-align: center; margin-top: 30px; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🧪 Test du Système de Compte</h1>
+
+        <div id="tests"></div>
+
+        <div class="button-group">
+            <button onclick="runTests()">▶️ Lancer tous les tests</button>
+            <button onclick="location.href='connexion.html'" style="background: #4caf50;">✅ Aller à la Connexion</button>
+        </div>
+    </div>
+
+    <script>
+        // Vérifier que AuthService (scripts/auth.clean.js) est chargé
+        function runTests() {
+            const testsDiv = document.getElementById('tests');
+            testsDiv.innerHTML = '';
+
+            const tests = [
+                testAuthServiceExists,
+                testStorageAvailable,
+                testAuthServiceMethods,
+                testGenerateEmails,
+                testGenerateFiles,
+                testPasswordValidation,
+                testSessionManagement
+            ];
+
+            tests.forEach((test, index) => {
+                setTimeout(() => {
+                    const result = test();
+                    displayTest(result);
+                }, index * 100);
+            });
+        }
+
+        function displayTest(result) {
+            const testsDiv = document.getElementById('tests');
+            const testDiv = document.createElement('div');
+            testDiv.className = 'test-item';
+            
+            const statusClass = result.passed ? 'success' : 'error';
+            const statusIcon = result.passed ? '✅' : '❌';
+            
+            testDiv.innerHTML = `
+                <strong>${statusIcon} ${result.name}</strong>
+                <div class="test-result ${statusClass}">
+                    ${result.message}
+                </div>
+            `;
+            
+            testsDiv.appendChild(testDiv);
+        }
+
+        function testAuthServiceExists() {
+            try {
+                if (typeof AuthService !== 'undefined') {
+                    return { name: 'AuthService Disponible', passed: true, message: 'AuthService est chargé et accessible' };
+                }
+                return { name: 'AuthService Disponible', passed: false, message: 'AuthService n\'est pas défini' };
+            } catch(e) {
+                return { name: 'AuthService Disponible', passed: false, message: e.message };
+            }
+        }
+
+        function testStorageAvailable() {
+            try {
+                const test = 'test';
+                localStorage.setItem(test, test);
+                localStorage.removeItem(test);
+                return { name: 'LocalStorage Disponible', passed: true, message: 'LocalStorage fonctionne correctement' };
+            } catch(e) {
+                return { name: 'LocalStorage Disponible', passed: false, message: 'LocalStorage n\'est pas accessible' };
+            }
+        }
+
+        function testAuthServiceMethods() {
+            try {
+                const methods = ['getUsers', 'findUser', 'login', 'logout', 'register', 'getCurrentUser', 'updateCurrentUser'];
+                const missing = [];
+                
+                methods.forEach(method => {
+                    if (typeof AuthService[method] !== 'function') {
+                        missing.push(method);
+                    }
+                });
+
+                if (missing.length === 0) {
+                    return { name: 'Méthodes AuthService', passed: true, message: 'Toutes les méthodes sont implémentées ✓' };
+                }
+                return { name: 'Méthodes AuthService', passed: false, message: 'Méthodes manquantes: ' + missing.join(', ') };
+            } catch(e) {
+                return { name: 'Méthodes AuthService', passed: false, message: e.message };
+            }
+        }
+
+        function testGenerateEmails() {
+            try {
+                const emails = AuthService.generateDefaultMails('Jean', 'Dupont');
+                if (emails && emails.length === 3) {
+                    return { name: 'Génération d\'Emails', passed: true, message: '3 emails générés avec succès' };
+                }
+                return { name: 'Génération d\'Emails', passed: false, message: `${emails.length} emails au lieu de 3` };
+            } catch(e) {
+                return { name: 'Génération d\'Emails', passed: false, message: e.message };
+            }
+        }
+
+        function testGenerateFiles() {
+            try {
+                const files = AuthService.generateDefaultFiles();
+                if (files && files.length === 5) {
+                    return { name: 'Génération de Fichiers', passed: true, message: '5 fichiers générés avec succès' };
+                }
+                return { name: 'Génération de Fichiers', passed: false, message: `${files.length} fichiers au lieu de 5` };
+            } catch(e) {
+                return { name: 'Génération de Fichiers', passed: false, message: e.message };
+            }
+        }
+
+        function testPasswordValidation() {
+            try {
+                // Test inscription avec un compte test
+                const result = AuthService.register({
+                    email: 'test-' + Date.now() + '@example.com',
+                    firstName: 'Test',
+                    lastName: 'User',
+                    password: 'TestPassword123!'
+                });
+
+                if (result.success) {
+                    return { name: 'Validation & Inscription', passed: true, message: 'Compte test créé avec succès' };
+                }
+                return { name: 'Validation & Inscription', passed: false, message: result.message };
+            } catch(e) {
+                return { name: 'Validation & Inscription', passed: false, message: e.message };
+            }
+        }
+
+        function testSessionManagement() {
+            try {
+                const currentUser = AuthService.getCurrentUser();
+                if (currentUser && currentUser.email) {
+                    return { name: 'Gestion de Session', passed: true, message: 'Session active: ' + currentUser.email };
+                }
+                return { name: 'Gestion de Session', passed: true, message: 'Aucune session active (normal si non connecté)' };
+            } catch(e) {
+                return { name: 'Gestion de Session', passed: false, message: e.message };
+            }
+        }
+
+        // Lancer automatiquement les tests au chargement
+        window.addEventListener('load', () => {
+            console.log('Page de test chargée. Cliquez sur "Lancer tous les tests"');
+        });
+    </script>
+</body>
+</html>

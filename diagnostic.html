@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Diagnostic Système de Connexion</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #f5f5f5;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 8px;
+            padding: 30px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        .test-group {
+            margin: 20px 0;
+            padding: 15px;
+            border-left: 4px solid #667eea;
+            background: #f9f9f9;
+            border-radius: 4px;
+        }
+
+        .test-item {
+            display: flex;
+            align-items: center;
+            margin: 10px 0;
+            padding: 10px;
+            background: white;
+            border-radius: 4px;
+        }
+
+        .status-icon {
+            font-size: 20px;
+            margin-right: 10px;
+            min-width: 30px;
+        }
+
+        .status-ok {
+            color: #0d0;
+        }
+
+        .status-error {
+            color: #d00;
+        }
+
+        .status-info {
+            color: #00a;
+        }
+
+        .test-label {
+            flex: 1;
+        }
+
+        .test-value {
+            font-family: monospace;
+            background: #eee;
+            padding: 5px 10px;
+            border-radius: 3px;
+            font-size: 12px;
+        }
+
+        button {
+            background: #667eea;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            margin: 5px;
+            font-size: 14px;
+        }
+
+        button:hover {
+            background: #764ba2;
+        }
+
+        .output {
+            background: #f0f0f0;
+            padding: 10px;
+            border-radius: 4px;
+            margin-top: 10px;
+            font-family: monospace;
+            font-size: 12px;
+            max-height: 300px;
+            overflow-y: auto;
+        }
+    </style>
+    <link rel="stylesheet" href="styles/glitch.css">
+</head>
+
+<body>
+    <div class="container">
+        <h1>🔍 Diagnostic Système de Connexion</h1>
+
+        <div class="test-group">
+            <h2>📊 État Actuel</h2>
+            <div class="test-item">
+                <span class="status-icon" id="auth-status">❓</span>
+                <span class="test-label">Authentification</span>
+                <span class="test-value" id="auth-value">Vérification...</span>
+            </div>
+            <div class="test-item">
+                <span class="status-icon" id="user-status">❓</span>
+                <span class="test-label">Utilisateur Courant</span>
+                <span class="test-value" id="user-value">Chargement...</span>
+            </div>
+            <div class="test-item">
+                <span class="status-icon" id="storage-status">❓</span>
+                <span class="test-label">localStorage</span>
+                <span class="test-value" id="storage-value">Vérification...</span>
+            </div>
+        </div>
+
+        <div class="test-group">
+            <h2>🧪 Tests d'Authentification</h2>
+            <button onclick="testLogin('demo@nova.com', 'Demo1234')">
+                Tester Login: demo@nova.com
+            </button>
+            <button onclick="testLogin('invalid@email.com', 'wrongpass')">
+                Tester Login Invalide
+            </button>
+            <button onclick="testRegister()">
+                Tester Enregistrement
+            </button>
+            <div class="output" id="test-output"></div>
+        </div>
+
+        <div class="test-group">
+            <h2>🗑️ Actions</h2>
+            <button onclick="clearLocalStorage()">Effacer localStorage</button>
+            <button onclick="goToLogin()">Aller à Connexion</button>
+            <button onclick="goToProfile()">Aller au Profil</button>
+            <button onclick="location.reload()">Recharger la Page</button>
+        </div>
+
+        <div class="test-group">
+            <h2>📋 Comptes de Démo</h2>
+            <div class="test-item">
+                <span style="flex: 1;">demo@nova.com / Demo1234</span>
+            </div>
+            <div class="test-item">
+                <span style="flex: 1;">test@nova.com / Test1234</span>
+            </div>
+            <div class="test-item">
+                <span style="flex: 1;">user@nova.com / User1234</span>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Charger le script d'authentification
+        const mockAuthScript = document.createElement('script');
+        mockAuthScript.src = 'scripts/mock-auth.js';
+        document.head.appendChild(mockAuthScript);
+
+        function updateStatus() {
+            // Vérifier l'authentification
+            const user = getStoredUser();
+            const isLoggedIn = !!user;
+
+            // Mettre à jour l'UI
+            const authStatus = document.getElementById('auth-status');
+            const authValue = document.getElementById('auth-value');
+            if (isLoggedIn) {
+                authStatus.textContent = '✓';
+                authStatus.className = 'status-icon status-ok';
+                authValue.textContent = 'Connecté';
+            } else {
+                authStatus.textContent = '✗';
+                authStatus.className = 'status-icon status-error';
+                authValue.textContent = 'Non connecté';
+            }
+
+            // Utilisateur
+            const userStatus = document.getElementById('user-status');
+            const userValue = document.getElementById('user-value');
+            if (user) {
+                userStatus.textContent = '✓';
+                userStatus.className = 'status-icon status-ok';
+                userValue.textContent = user.firstName + ' ' + user.lastName + ' (' + user.email + ')';
+            } else {
+                userStatus.textContent = '✗';
+                userStatus.className = 'status-icon status-error';
+                userValue.textContent = 'Aucun';
+            }
+
+            // localStorage
+            const storageStatus = document.getElementById('storage-status');
+            const storageValue = document.getElementById('storage-value');
+            try {
+                const size = JSON.stringify(localStorage).length;
+                storageStatus.textContent = '✓';
+                storageStatus.className = 'status-icon status-ok';
+                storageValue.textContent = size + ' bytes';
+            } catch (e) {
+                storageStatus.textContent = '✗';
+                storageStatus.className = 'status-icon status-error';
+                storageValue.textContent = 'Erreur';
+            }
+        }
+
+        function getStoredUser() {
+            try {
+                const raw = localStorage.getItem('nova_mock_user');
+                return raw ? JSON.parse(raw) : null;
+            } catch (e) {
+                return null;
+            }
+        }
+
+        function log(message) {
+            const output = document.getElementById('test-output');
+            const timestamp = new Date().toLocaleTimeString();
+            output.innerHTML += `[${timestamp}] ${message}\n`;
+            output.scrollTop = output.scrollHeight;
+        }
+
+        function testLogin(email, password) {
+            log(`➤ Tentative connexion: ${email}`);
+
+            setTimeout(() => {
+                if (typeof AuthService === 'undefined') {
+                    log('❌ AuthService non disponible');
+                    return;
+                }
+
+                const result = AuthService.login(email, password);
+                if (result.success) {
+                    log(`✓ Connexion réussie pour ${email}`);
+                    log(`  Utilisateur: ${result.user.firstName} ${result.user.lastName}`);
+                } else {
+                    log(`✗ Erreur: ${result.message}`);
+                }
+                updateStatus();
+            }, 100);
+        }
+
+        function testRegister() {
+            const email = 'test' + Date.now() + '@example.com';
+            log(`➤ Tentative création compte: ${email}`);
+
+            setTimeout(() => {
+                if (typeof AuthService === 'undefined') {
+                    log('❌ AuthService non disponible');
+                    return;
+                }
+
+                const result = AuthService.register(email, 'Test', 'User', 'Password123');
+                if (result.success) {
+                    log(`✓ Compte créé: ${email}`);
+                    log(`  Utilisateur: ${result.user.firstName} ${result.user.lastName}`);
+                    // Connecter automatiquement
+                    const login = AuthService.login(email, 'Password123');
+                    if (login.success) {
+                        log(`✓ Auto-connexion réussie`);
+                    }
+                } else {
+                    log(`✗ Erreur: ${result.message}`);
+                }
+                updateStatus();
+            }, 100);
+        }
+
+        function clearLocalStorage() {
+            localStorage.removeItem('nova_mock_user');
+            log('✓ localStorage effacé');
+            updateStatus();
+        }
+
+        function goToLogin() {
+            window.location.href = 'connexion.html';
+        }
+
+        function goToProfile() {
+            window.location.href = 'profil.html';
+        }
+
+        // Mise à jour initiale
+        setTimeout(updateStatus, 200);
+
+        // Mise à jour toutes les secondes
+        setInterval(updateStatus, 1000);
+    </script>
+    <script src="scripts/glitch-effect.js"></script>
+</body>
+
+</html>
