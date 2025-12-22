@@ -10,25 +10,25 @@
     --nova-dark-light: #1e2d45;
     --nova-light: #f8fafc;
     --nova-white: #ffffff;
-    
+
     /* Couleurs de texte */
     --text-primary: #0d1b2a;
     --text-secondary: #4a5568;
     --text-tertiary: #718096;
     --text-light: #ffffff;
-    
+
     /* Couleurs de fond */
     --bg-primary: #ffffff;
     --bg-secondary: #f8fafc;
     --bg-tertiary: #edf2f7;
     --bg-dark: #0d1b2a;
-    
+
     /* Couleurs d'état */
     --success: #10b981;
     --warning: #f59e0b;
     --error: #ef4444;
     --info: #3b82f6;
-    
+
     /* Ombre et bordures */
     --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
     --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
@@ -40,7 +40,7 @@
     --border-radius-md: 8px;
     --border-radius-lg: 12px;
     --border-radius-xl: 16px;
-    
+
     /* Espacements */
     --space-xs: 0.25rem;
     --space-sm: 0.5rem;
@@ -49,12 +49,12 @@
     --space-xl: 2rem;
     --space-2xl: 3rem;
     --space-3xl: 4rem;
-    
+
     /* Typographie */
-    --font-family-base: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 
-                       'Helvetica Neue', Arial, sans-serif;
-    --font-family-heading: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 
-                         'Helvetica Neue', Arial, sans-serif;
+    --font-family-base: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
+        'Helvetica Neue', Arial, sans-serif;
+    --font-family-heading: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
+        'Helvetica Neue', Arial, sans-serif;
     --font-size-xs: 0.75rem;
     --font-size-sm: 0.875rem;
     --font-size-base: 1rem;
@@ -72,12 +72,12 @@
     --line-height-tight: 1.25;
     --line-height-normal: 1.5;
     --line-height-relaxed: 1.75;
-    
+
     /* Transitions */
     --transition-fast: 150ms ease;
     --transition-normal: 250ms ease;
     --transition-slow: 350ms ease;
-    
+
     /* Z-index */
     --z-dropdown: 1000;
     --z-sticky: 1020;
@@ -90,7 +90,9 @@
 /* ============================================
    RÉINITIALISATION
    ============================================ */
-*, *::before, *::after {
+*,
+*::before,
+*::after {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
@@ -115,7 +117,12 @@ body {
 /* ============================================
    TYPOGRAPHIE
    ============================================ */
-h1, h2, h3, h4, h5, h6 {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
     font-family: var(--font-family-heading);
     font-weight: var(--font-weight-bold);
     line-height: var(--line-height-tight);
@@ -291,6 +298,32 @@ header {
     background-color: var(--text-primary);
     border-radius: 3px;
     transition: var(--transition-normal);
+}
+
+/* Touch-friendly improvements */
+@media (hover: none) and (pointer: coarse) {
+
+    /* Disable hover effects on touch devices */
+    .nav-link:hover::after {
+        width: 0;
+    }
+
+    .card:hover,
+    .feature-card:hover {
+        transform: none;
+    }
+
+    /* Larger touch targets */
+    .nav-link,
+    .nav-button,
+    button,
+    a {
+        min-height: 44px;
+        min-width: 44px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+    }
 }
 
 /* ============================================
@@ -548,7 +581,7 @@ footer {
         grid-template-columns: 1fr;
         gap: var(--space-2xl);
     }
-    
+
     .footer-links-grid {
         grid-template-columns: repeat(2, 1fr);
     }
@@ -558,29 +591,87 @@ footer {
     .header-container {
         padding: var(--space-sm) var(--space-md);
     }
-    
+
+    /* Keep nav visible but hide the list initially */
+    .main-nav {
+        display: flex;
+    }
+
     .nav-list {
+        /* Don't use display: none, use transform instead (handled by menu.js) */
+        position: fixed;
+        top: 73px;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: var(--bg-primary);
+        flex-direction: column;
+        padding: var(--space-xl);
+        gap: var(--space-lg);
+        transform: translateX(100%);
+        transition: transform 0.3s ease;
+        z-index: 999;
+        overflow-y: auto;
+        box-shadow: -2px 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .nav-list.active {
+        transform: translateX(0);
+    }
+
+    /* Mobile menu items - larger touch targets */
+    .nav-list li {
+        width: 100%;
+    }
+
+    .nav-list .nav-link,
+    .nav-list .nav-button {
+        width: 100%;
+        padding: var(--space-md) var(--space-lg);
+        font-size: var(--font-size-lg);
+        min-height: 48px;
+    }
+
+    .nav-list .nav-link::after {
         display: none;
     }
-    
+
     .mobile-menu-btn {
         display: flex;
     }
-    
+
+    /* Hamburger menu animation */
+    .mobile-menu-btn.active span:nth-child(1) {
+        transform: rotate(45deg) translate(6px, 6px);
+    }
+
+    .mobile-menu-btn.active span:nth-child(2) {
+        opacity: 0;
+    }
+
+    .mobile-menu-btn.active span:nth-child(3) {
+        transform: rotate(-45deg) translate(6px, -6px);
+    }
+
+    /* Header shadow on scroll */
+    header.scrolled {
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    }
+
     .footer-links-grid {
         grid-template-columns: 1fr;
     }
-    
+
     .footer-bottom-content {
         flex-direction: column;
         text-align: center;
         gap: var(--space-md);
     }
-    
+
     .section {
         padding: var(--space-2xl) 0;
     }
-    
+
     .section-content {
         padding: 0 var(--space-md);
     }
@@ -593,19 +684,19 @@ footer {
         --space-2xl: 2rem;
         --space-3xl: 2.5rem;
     }
-    
+
     h1 {
         font-size: var(--font-size-4xl);
     }
-    
+
     h2 {
         font-size: var(--font-size-3xl);
     }
-    
+
     h3 {
         font-size: var(--font-size-xl);
     }
-    
+
     .btn-primary,
     .btn-secondary {
         width: 100%;

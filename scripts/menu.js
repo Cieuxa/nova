@@ -108,51 +108,9 @@ document.addEventListener('DOMContentLoaded', function () {
     handleScroll(); // Initial check
 });
 
-// Ajout des styles pour le menu mobile
-const mobileMenuStyles = `
-    @media (max-width: 768px) {
-        .nav-list {
-            position: fixed;
-            top: 73px;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background-color: var(--bg-primary);
-            flex-direction: column;
-            padding: var(--space-xl);
-            gap: var(--space-lg);
-            transform: translateX(100%);
-            transition: transform 0.3s ease;
-            z-index: 999;
-            overflow-y: auto;
-        }
-        
-        .nav-list.active {
-            transform: translateX(0);
-        }
-        
-        .mobile-menu-btn.active span:nth-child(1) {
-            transform: rotate(45deg) translate(6px, 6px);
-        }
-        
-        .mobile-menu-btn.active span:nth-child(2) {
-            opacity: 0;
-        }
-        
-        .mobile-menu-btn.active span:nth-child(3) {
-            transform: rotate(-45deg) translate(6px, -6px);
-        }
-        
-        header.scrolled {
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-        }
-    }
-`;
+// Note: Les styles du menu mobile sont maintenant dans style.css
+// pour éviter les conflits et améliorer les performances
 
-// Injecter les styles
-const styleElement = document.createElement('style');
-styleElement.textContent = mobileMenuStyles;
-document.head.appendChild(styleElement);
 
 // ============================================
 // GESTION GLOBALE DE L'AUTHENTIFICATION (MENU)
